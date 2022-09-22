@@ -7,11 +7,11 @@ import docentesValidar from '../helpers/docente.js';
 import { validarCampos } from '../middleware/validarCampos.js';
 const router = Routes();
 router.get('/', [
-    validarJWT,
+    // validarJWT,
     validarRoles('ADMIN_ROL'),
 ], docentesControllers.docenteGet);
 router.post('/', [
-
+    validarJWT,
     check('nombres', 'El campo nombres no puede estar vacio').not().isEmpty(),
     check('apellidos', 'El campo apellidos no puede estar vacio').not().isEmpty(),
     check('numeroDocumento', 'El campo numero Documento no puede estar vacio').not().isEmpty(),
@@ -27,6 +27,8 @@ router.post('/', [
 
 ], docentesControllers.docentesPost);
 router.post('/login', [
+    validarJWT,
+
     check('usuario', 'El campo usuario no puede estar vacio').not().isEmpty(),
     check('password', 'El campo password no puede estar vacio').not().isEmpty(),
     validarCampos
